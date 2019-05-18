@@ -1,0 +1,87 @@
+				$scope.swapCity = function(index) {
+					$timeout(function(){
+						var temp;
+						 if(!$scope.orgDestModel[index].destination) {
+							$rootScope.$broadcast('checkValidate', $scope.modifyData);
+							return;
+						}
+						//qProp = angular.extend({}, QueryProp);
+						if($scope.modifyData.type === 'M') {
+							temp = $scope.modifyData['origin_'+index];
+							$scope.modifyData['origin_'+index] = $scope.modifyData['destination_'+index];
+							$scope.modifyData['destination_'+index] = temp;
+							$scope.modifyData = MSM.getModifyParams($scope.modifyData);
+							$scope.orgDestModel = MSM.setOrgDestDisplayModel();
+						}
+						else {
+							temp = qProp.origin;
+							qProp.origin = qProp.destination;
+							qProp.destination = temp;
+							start(qProp);
+							$scope.showTypeOfTrip = true;
+						}
+						$scope.orgDestModel[index].swapped = !$scope.orgDestModel[index].swapped;
+					});
+				}
+
+
+
+
+
+
+
+
+                $scope.modifyYourSearch = function($event){
+					document.body.scrollTop = 0;
+					document.documentElement.scrollTop = 0;
+				}
+
+
+
+
+
+
+ model
+                	setOrgDestDisplayValue: function (i) {
+		var flag = i != undefined ? "_" + i : '',
+			temp = {},
+			parmsList = [MSM.config.prmN.org, MSM.config.prmN.dest, MSM.config.prmN.fdd, MSM.config.prmN.swapped];
+		if (this.dump.SP[MSM.config.prmN.typ] == "R") {
+			parmsList.push(MSM.config.prmN.rd);
+		}
+		for (var a = 0; a < parmsList.length; a++) {
+			var cd = parmsList[a] + flag;
+			if (parmsList[a] == MSM.config.prmN.org || parmsList[a] == MSM.config.prmN.dest) {
+				temp[parmsList[a]] = MSM.getCityDisplayName(cd);
+			} else if(parmsList[a] === MSM.config.prmN.swapped) {
+				temp[parmsList[a]] = false;
+			} else {
+				var k = this.dump[this.dump.SP[this.config.prmN.typ]][cd];
+				temp[parmsList[a]] = k;
+			}
+		}
+		return temp;
+	},
+
+
+swapped
+
+
+
+
+                //flightapp.js
+
+        init: function () {
+        YTMethods.setStartTime('page');
+        AdobeTrack.firstByteLoaded();
+        var YTF = YTFlights;
+        YTF.setQueryProp();
+        for(var i in QueryProp) {
+            QueryProp[i] = decodeURI(QueryProp[i]);
+        }
+
+
+
+
+
+

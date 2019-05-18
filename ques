@@ -1,0 +1,28 @@
+function promiseWrapper(){
+  return new Promise((resolve,reject)=>
+                 {
+                   resolve(1);
+				   reject(2)
+                   resolve(3);
+                   console.log(1) })}
+
+
+promiseWrapper().then(console.log,console.error);
+
+
+(function(x){
+    console.log(',,,,,,,,,',x)
+    delete x;
+    console.log(delete x);
+    console.log('.............',x);
+    return x;
+})(1);
+
+var a = new Function()
+
+
+
+function foo(prop1){};
+foo.prop1="up";
+var obj=new foo("initial value");
+console.log(obj.prop1);
